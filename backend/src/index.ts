@@ -2,28 +2,28 @@ import { Hono } from 'hono'
 
 const app = new Hono()
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
-
 app.post('/api/v1/user/signup', (c) => {
-  const body = c.body
-  return c.json(body)
+  return c.text('hello hono')
 })
 
 app.post('/api/v1/user/signin', (c) => {
-  const body = c.body
-  return c.json(body)
+  return c.text('hello hono')
 })
 
 app.post('/api/v1/blog', (c) => {
-  const body = c.body
-  return c.json(body)
+  return c.text('hello hono')
 })
 
-app.post('/api/v1/blog', (c) => {
-  const body = c.body
-  return c.json(body)
+
+app.put('/api/v1/blog', (c) => {
+  return c.text('hello hono')
 })
 
+app.get('/api/v1/blog/:id', (c) => {
+  return c.text('hello hono')
+})
+
+app.get('/api/v1/blog/bulk', (c) => {
+  return c.text('hello hono')
+})
 export default app
