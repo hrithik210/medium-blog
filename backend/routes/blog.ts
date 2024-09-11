@@ -1,19 +1,37 @@
 import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
+import { verify } from 'hono/jwt';
 
 export const blogRouter = new Hono<{
     Bindings:{
         DATABASE_URL: string;
         JWT_SECRET: string;
+      },
+    Variables:{
+        userId: string;
       }
 }>()
+
 blogRouter.use('/*', async (c, next) => {
-    next()
+    const token = c.req.header('authorization') || ''
+    const user = await verify(token, c.env.JWT_SECRET)
+    
+    if(user){
+        c.set('userId', user.id as string)
+        next()
+    }
+    else{
+        c.status(401)
+        return c.json({
+            msg: "Unauthorized"
+        })
+    }
 })
 
 
 blogRouter.post('/', async(c) => {
+    const authorId = c.get('userId')
     const body = await c.req.json()
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
@@ -22,7 +40,7 @@ blogRouter.post('/', async(c) => {
         const blog = await prisma.blog.create({
             data:{
                 title:body.title,
-                authorId:1,
+                authorId: Number(authorId),
                 content:body.content,
                 thumbnail: body.thumbnail // Add thumbnail property
             }
