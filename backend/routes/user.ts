@@ -10,7 +10,7 @@ export const userRouter = new Hono<{
       }
 }>()
 
-userRouter.post('/api/v1/user/signup', async(c) => {
+userRouter.post('/signup', async(c) => {
     const body = await c.req.json()
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,

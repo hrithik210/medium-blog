@@ -19,7 +19,7 @@ blogRouter.use('/*', async (c, next) => {
     
     if(user){
         c.set('userId', user.id as string)
-        next()
+        await next()
     }
     else{
         c.status(401)
@@ -79,29 +79,8 @@ blogRouter.put('/', async(c) => {
         
     }
   })
-  
-blogRouter.get('/', async(c) => {
-    const body = await c.req.json()
-    const prisma = new PrismaClient({
-        datasourceUrl: c.env.DATABASE_URL,
-      }).$extends(withAccelerate())
-      try {
-          const blog = await prisma.blog.findFirst({
-              where:{id:body.id},
-          })
-          return c.json({
-              blog
-          })
-      } catch (error) {
-          c.status(411);
-          return c.json({
-            msg: "something went wrong while fetching the blog"
-          })
-          
-      }
-  })
-  
-  // todo : add pagination
+
+// todo : add pagination
   blogRouter.get('/bulk', async(c) => {
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
@@ -115,3 +94,25 @@ blogRouter.get('/', async(c) => {
           return c.text('cannot fetch blogs')
       }
   })
+  
+blogRouter.get('/:id', async(c) => {
+    const id =  c.req.param("id")
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+      }).$extends(withAccelerate())
+      try {
+          const blog = await prisma.blog.findFirst({
+              where:{id:Number(id)},
+          })
+          return c.json({
+              blog
+          })
+      } catch (error) {
+          c.status(411);
+          return c.json({
+            msg: "something went wrong while fetching the blog"
+          })
+          
+      }
+  })
+  
