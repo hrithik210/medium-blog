@@ -36,6 +36,7 @@ userRouter.post('/signup', async(c) => {
         }, c.env.JWT_SECRET)
       return c.text(jwt)
     } catch (e) {
+      console.log(e)
       return c.text('Invalid')
     }
   

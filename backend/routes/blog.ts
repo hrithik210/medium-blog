@@ -85,7 +85,7 @@ blogRouter.put('/', async(c) => {
             }
         })
         return c.json({
-            id:blog.id
+            blog
         })
     } catch (error) {
         return c.text('Invalid')
