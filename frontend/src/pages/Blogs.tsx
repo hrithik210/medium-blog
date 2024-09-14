@@ -1,31 +1,28 @@
 
+import AppBar from '../component/AppBar'
 import BlogsCard from '../component/BlogsCard'
+import { useBlogs } from '../hooks'
 
 const Blogs = () => {
+    const {loading , blogs} = useBlogs()
+
+    if(loading) {
+        return <div>Loading...</div>
+    }
     return (
         <div>
-            <BlogsCard
-                authorName={"Peter V."}
-
-                date={"Dec 3, 2023"}
-                title={"How an Ugly Single-Page Website Makes $5,000 a Month with Affiliate Marketing"}
-                content={"No need to create a fancy and modern website with hundreds of pages to make money online. — Making money online is the dream for man..."}
-            />
-
-            <BlogsCard
-                authorName={"Peter V."}
-
-                date={"Dec 3, 2023"}
-                title={"How an Ugly Single-Page Website Makes $5,000 a Month with Affiliate Marketing"}
-                content={"No need to create a fancy and modern website with hundreds of pages to make money online. — Making money online is the dream for man..."}
-            />
-            <BlogsCard
-                authorName={"Peter V."}
-
-                date={"Dec 3, 2023"}
-                title={"How an Ugly Single-Page Website Makes $5,000 a Month with Affiliate Marketing"}
-                content={"No need to create a fancy and modern website with hundreds of pages to make money online. — Making money online is the dream for man..."}
-            />
+            <AppBar />
+            <div>
+                {blogs.map((blog) => (
+                    <BlogsCard
+                        id={blog.id}
+                        authorName={blog.author.name|| "Anonymous" }
+                        date={"Dec 3, 2023"}
+                        title={blog.title}
+                        content={blog.content}
+                    />
+                ))}
+             </div>
 
         </div>
     )
