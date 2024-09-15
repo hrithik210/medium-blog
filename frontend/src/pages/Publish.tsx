@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { BACKEND_URL } from "../Config"
 import { useNavigate } from "react-router-dom"
+import AppBar from "../component/AppBar"
 
 export default function Publish() {
   const [title, setTitle] = useState("")
@@ -21,6 +22,8 @@ async function publishBlog(){
   }
 
   return (
+    <div>
+      <AppBar />
     <div className="min-h-screen bg-gray-100 p-4 flex items-center justify-center">
       <div className="bg-white w-full max-w-4xl h-[36rem] rounded-lg shadow-lg overflow-hidden flex flex-col">
         <div className="flex items-center p-4 border-b">
@@ -51,6 +54,7 @@ async function publishBlog(){
         </div>
     </div>
       
+    </div>
     </div>
   )
 }
