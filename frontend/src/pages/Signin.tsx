@@ -1,19 +1,20 @@
 import Auth from "../component/Auth"
 import Quote from "../component/Quote"
 
-
-const Signin = () => {
+const Signup = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2">
-      <div>
-        <Auth type="signin"/> 
+    <div className="min-h-screen flex flex-col lg:flex-row">
+      <div className="flex-1 flex items-center justify-center p-4 lg:p-8">
+        <div className="w-full max-w-md">
+          <Auth type="signin"/> 
+        </div>
       </div>
     
-      <div className="hidden lg:block">
+      <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center p-8">
         <Quote />
       </div>
     </div>
   )
 }
 
-export default Signin
+export default Signup
