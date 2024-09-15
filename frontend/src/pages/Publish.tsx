@@ -35,7 +35,7 @@ async function publishBlog(){
             placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="ml-4 text-3xl font-light text-gray-700 placeholder-gray-400 focus:outline-none flex-grow"
+            className="ml-4 text-2xl font-light text-gray-700 placeholder-gray-400 focus:outline-none flex-grow"
           />
         </div>
         <textarea

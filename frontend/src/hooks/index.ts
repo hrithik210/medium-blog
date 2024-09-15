@@ -19,9 +19,10 @@ export const useBlog = ({id}: {id: number}) => {
             headers:{
                 Authorization:localStorage.getItem("jwt token")
             }
-        }).then((response) => 
-            setBlog(response.data.blog));
+        }).then((response) => {
+            setBlog(response.data.blog);
             setLoading(false);
+        });
     }, [id]);
 
     return {
@@ -31,16 +32,17 @@ export const useBlog = ({id}: {id: number}) => {
 }
 
 export const useBlogs = () => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [blogs, setBlogs] = useState<Blog[]>([]);
     useEffect(() => {
         axios.get(`${BACKEND_URL}/api/v1/blog/bulk`, {
             headers:{
                 Authorization:localStorage.getItem("jwt token")
             }
-        }).then((response) => 
-            setBlogs(response.data.blog));
+        }).then((response) => {
+            setBlogs(response.data.blog);
             setLoading(false);
+        });
     }, []);
 
     return {
