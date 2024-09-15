@@ -8,12 +8,12 @@ const Blog = () => {
     id: id ? parseInt(id) : 0
   })
 
-  if (loading){
+  if (loading || !blog){
     return <div>Loading...</div>
   }
   return (
     <div>
-      {blog ? <FullBlog blog={blog}/> : <div>Blog not found</div>}
+      <FullBlog blog={blog}/>
     </div>
   )
 }

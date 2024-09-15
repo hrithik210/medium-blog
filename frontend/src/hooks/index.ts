@@ -12,7 +12,7 @@ export interface Blog {
 }
 //fetching blogs with id 
 export const useBlog = ({id}: {id: number}) => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [blog, setBlog] = useState<Blog>();
     useEffect(() => {
         axios.get(`${BACKEND_URL}/api/v1/blog/${id}`, {
