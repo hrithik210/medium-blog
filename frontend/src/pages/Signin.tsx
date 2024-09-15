@@ -1,20 +1,24 @@
 import Auth from "../component/Auth"
 import Quote from "../component/Quote"
 
-const Signup = () => {
+const Signin = () => {
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
-      <div className="flex-1 flex items-center justify-center p-4 lg:p-8">
+      {/* Signup section */}
+      <div className="flex-1 flex items-center justify-center p-4 lg:p-8 lg:w-1/2">
         <div className="w-full max-w-md">
-          <Auth type="signin"/> 
+          <Auth type="signin" />
         </div>
       </div>
-    
-      <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center p-8">
-        <Quote />
+      
+      {/* Quote section */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gray-100">
+        <div className="w-full flex items-center justify-center">
+          <Quote />
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signin;
