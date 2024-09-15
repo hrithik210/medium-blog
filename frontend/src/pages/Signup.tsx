@@ -10,7 +10,7 @@ const Signup = () => {
         </div>
       </div>
     
-      <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center p-8">
+      <div className="hidden lg:flex ">
         <Quote />
       </div>
     </div>
