@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { SignupInputType } from "@hrithik2210/medium-common";
 import axios from "axios";
 import { BACKEND_URL } from "../Config";
+import Loader from "./Loader";
 
 const Auth = ({ type }: { type: "signup" | "signin" }) => {
   const navigate = useNavigate();
@@ -12,10 +13,12 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
     password: "",
   });
   
-  // New state for managing error messages
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function sendRequest() {
+    setLoading(true);
+    console.log("Loading started");
     try {
       const response = await axios.post(
         `${BACKEND_URL}/api/v1/user/${type === "signin" ? "signin" : "signup"}`,
@@ -31,6 +34,8 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
         else
             setError("enter a valid email and make sure password is atleast 6 characters.");
      ;
+    } finally {
+      setLoading(false); // Stop loading
     }
   }
 
@@ -77,9 +82,10 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
           </div>
           <button
             onClick={sendRequest}
-            className="w-full bg-black text-white mt-3 rounded-lg font-medium py-2"
+            className="w-full bg-black text-white mt-3 rounded-lg font-medium py-2 relative"
+            
           >
-            {type === "signup" ? "Sign Up" : "Sign In"}
+            {loading ? <Loader /> : (type === "signup" ? "Sign Up" : "Sign In")}
           </button>
         </div>
       </div>
